@@ -12,5 +12,5 @@ interface DomainObjectInterface
 
     public function typeIs(string $className): bool;
 
-    public function equals(DomainObjectInterface $object): bool;
+//    public function equals(DomainObjectInterface $object): bool;
 }

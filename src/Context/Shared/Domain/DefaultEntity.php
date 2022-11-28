@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Context\Shared\Domain;
 
+use Symfony\Component\Uid\Uuid;
+
 abstract class DefaultEntity extends DefaultObjectInterface implements EntityInterface
 {
     protected array $events = [];
 
-    protected IdInterface $id;
+    protected Uuid $id;
 
     public function equals(DomainObjectInterface $object): bool
     {
@@ -23,7 +25,7 @@ abstract class DefaultEntity extends DefaultObjectInterface implements EntityInt
         return $events;
     }
 
-    public function id(): IdInterface
+    public function id(): Uuid
     {
         return $this->id;
     }

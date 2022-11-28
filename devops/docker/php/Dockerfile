@@ -6,6 +6,14 @@ ARG USER_UID=1000
 RUN apk update && apk add libpq-dev \
     && docker-php-ext-install pdo pdo_pgsql
 
+# Xdebug
+RUN apk add --no-cache --virtual .php_builddeps autoconf g++ make \
+    && pecl install -f xdebug \
+    && apk del .php_builddeps \
+    && docker-php-ext-enable xdebug
+
+COPY devops/docker/php/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
 RUN addgroup -g ${USER_GID} app \
   && adduser -D -s /bin/sh -G app -u ${USER_UID} app
 

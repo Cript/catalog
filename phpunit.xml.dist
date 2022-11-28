@@ -28,8 +28,11 @@
 
     <coverage processUncoveredFiles="true">
         <include>
-            <directory suffix=".php">src</directory>
+            <directory suffix=".php">src/Context/Products</directory>
         </include>
+        <exclude>
+            <directory suffix=".php">src/Context/Products/Infrastructure</directory>
+        </exclude>
     </coverage>
 
     <listeners>
