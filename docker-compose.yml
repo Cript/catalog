@@ -10,4 +10,13 @@ services:
             - "8000:8000"
         volumes:
             - .:/var/www/html
-
+    postgres:
+        image: postgres:15-alpine
+        environment:
+            POSTGRES_DB: app
+            POSTGRES_PASSWORD: password
+            POSTGRES_USER: app
+        volumes:
+            - db-data:/var/lib/postgresql/data:rw
+volumes:
+    db-data:
