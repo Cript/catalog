@@ -5,13 +5,30 @@ framework:
 
         transports:
             # https://symfony.com/doc/current/messenger.html#transport-configuration
-            # async: '%env(MESSENGER_TRANSPORT_DSN)%'
-            # failed: 'doctrine://default?queue_name=failed'
-            # sync: 'sync://'
+            xml_import:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: xml_import
+            products:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: products
+            sync: 'sync://'
+#            failed: 'doctrine://default?queue_name=failed'
 
         routing:
-            # Route your messages to the transports
-            # 'App\Message\YourMessage': async
+            'App\Context\Products\Application\Query\GetProducts\GetProducts': sync
+            'App\Context\ImportXML\Domain\Event\ProductAddedFromXMLEvent': xml_import
+            'App\Context\Products\Domain\Event\ProductChangedFromXMLEvent': xml_import
+            'App\Context\Products\Domain\Event\ProductCreatedEvent': products
+            'App\Context\Products\Domain\Event\ProductUpdatedEvent': products
+
+        default_bus: command.bus
+        buses:
+            command.bus: ~
+            query.bus: ~
+            event.bus:
+                default_middleware: allow_no_handlers
 
 # when@test:
 #    framework:

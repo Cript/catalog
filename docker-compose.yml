@@ -10,6 +10,8 @@ services:
             - "8000:8000"
         volumes:
             - .:/var/www/html
+        networks:
+            - app
     postgres:
         image: postgres:15-alpine
         environment:
@@ -18,5 +20,23 @@ services:
             POSTGRES_USER: app
         volumes:
             - db-data:/var/lib/postgresql/data:rw
+        networks:
+            - app
+    elasticsearch:
+        image: elasticsearch:8.5.1
+        environment:
+            - http.host=0.0.0.0
+            - xpack.security.enabled=false
+            - discovery.type=single-node
+            - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+        ports:
+            - "9200:9200"
+        volumes:
+            - elasticsearch-data:/usr/share/elasticsearch/data
+        networks:
+            - app
 volumes:
     db-data:
+    elasticsearch-data:
+networks:
+    app:

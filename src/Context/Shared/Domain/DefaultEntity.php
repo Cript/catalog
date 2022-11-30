@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Context\Shared\Domain;
 
+use App\Context\Shared\Application\Bus\Event\EventInterface;
 use Symfony\Component\Uid\Uuid;
 
 abstract class DefaultEntity extends DefaultObjectInterface implements EntityInterface
@@ -30,7 +31,7 @@ abstract class DefaultEntity extends DefaultObjectInterface implements EntityInt
         return $this->id;
     }
 
-    protected function record(Event $event): void
+    protected function record(EventInterface $event): void
     {
         $this->events[] = $event;
     }

@@ -1,0 +1,14 @@
+services:
+### ImportXML Context
+    test.import_xml.handler:
+        alias: App\Context\ImportXML\Application\Command\ImportXML\ImportXMLHandler
+        public: true
+    test.import_xml.import_repository:
+        alias: App\Context\ImportXML\Infrastructure\ImportInMemoryRepository
+        public: true
+    test.import_xml.product_repository:
+        alias: App\Context\ImportXML\Infrastructure\ProductInMemoryRepository
+        public: true
+
+    App\Context\ImportXML\Domain\ImportRepositoryInterface: '@App\Context\ImportXML\Infrastructure\ImportInMemoryRepository'
+    App\Context\ImportXML\Domain\ProductRepositoryInterface: '@App\Context\ImportXML\Infrastructure\ProductInMemoryRepository'

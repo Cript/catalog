@@ -21,17 +21,23 @@
 <!--        <testsuite name="Project Test Suite">-->
 <!--            <directory>tests</directory>-->
 <!--        </testsuite>-->
-        <testsuite name="Products Test Suite">
+        <testsuite name="ImportXML Context Test Suite">
+            <directory>tests/Context/ImportXML/</directory>
+        </testsuite>
+        <testsuite name="Product Context Test Suite">
             <directory>tests/Context/Products/</directory>
         </testsuite>
     </testsuites>
 
     <coverage processUncoveredFiles="true">
         <include>
+            <directory suffix=".php">src/Context/ImportXML</directory>
             <directory suffix=".php">src/Context/Products</directory>
         </include>
         <exclude>
+            <directory suffix=".php">src/Context/ImportXML/Infrastructure</directory>
             <directory suffix=".php">src/Context/Products/Infrastructure</directory>
+            <file>src/Context/Products/Application/EventHandler/ProductAddedFromXMLHandler.php</file>
         </exclude>
     </coverage>
 

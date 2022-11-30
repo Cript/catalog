@@ -6,5 +6,4 @@ namespace App\Context\Shared\Domain;
 
 abstract class Event extends DefaultObject
 {
-
 }

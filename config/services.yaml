@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    elasticsearch_url: '%env(ELASTICSEARCH_URL)%'
 
 services:
     # default configuration for services in *this* file
@@ -22,3 +23,26 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    _instanceof:
+        App\Context\Shared\Application\Bus\Command\CommandHandlerInterface:
+            tags:
+                - { name: messenger.message_handler, bus: command.bus }
+
+        App\Context\Shared\Application\Bus\Query\QueryHandlerInterface:
+            tags:
+                - { name: messenger.message_handler, bus: query.bus }
+
+        App\Context\Shared\Application\Bus\Event\EventHandlerInterface:
+            tags:
+                - { name: messenger.message_handler, bus: event.bus }
+
+    App\Context\Shared\Infrastructure\DomainEventsPlayer:
+        tags:
+            - { name: 'doctrine.event_subscriber' }
+
+    App\Context\ImportXML\Domain\ImportRepositoryInterface: '@App\Context\ImportXML\Infrastructure\ImportDoctrineRepository'
+    App\Context\ImportXML\Domain\ProductRepositoryInterface: '@App\Context\ImportXML\Infrastructure\ProductDoctrineRepository'
+
+    App\Context\Products\Domain\ProductRepositoryInterface: '@App\Context\Products\Infrastructure\ProductDoctrineRepository'
+    App\Context\Products\Domain\CategoryRepositoryInterface: '@App\Context\Products\Infrastructure\CategoryDoctrineRepository'
