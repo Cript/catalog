@@ -7,10 +7,6 @@ use App\Context\Shared\Domain\SimpleValueObject;
 
 class Name extends SimpleValueObject
 {
-    private function __construct(
-        private readonly string $name
-    ) {}
-
     public static function fromString(string $name): static {
         if (empty(trim($name))) {
             throw new NameError();

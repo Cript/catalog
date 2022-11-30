@@ -13,7 +13,8 @@ final class GetProductsTest extends TestCase
     {
         $query = new GetProducts(0, 10);
 
-        $this->assertEquals(0, $query->getPage());
-        $this->assertEquals(10, $query->getLimit());
+        $this->assertEquals(0, $query->page());
+        $this->assertEquals(10, $query->limit());
+        $this->assertEquals(10, $query->limit());
     }
 }

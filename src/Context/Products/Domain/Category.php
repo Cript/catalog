@@ -6,7 +6,7 @@ use App\Context\Products\Domain\ValueObject\Name;
 use App\Context\Shared\Domain\AggregateRoot;
 use Symfony\Component\Uid\Uuid;
 
-final class Category extends AggregateRoot
+class Category extends AggregateRoot
 {
     private function __construct(
         Uuid $id,

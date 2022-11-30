@@ -17,7 +17,7 @@ final class WeightType extends Type
 
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
-        $platform->getIntegerTypeDeclarationSQL([]);
+        return $platform->getIntegerTypeDeclarationSQL([]);
     }
 
     public function convertToPHPValue($value, AbstractPlatform $platform): mixed
