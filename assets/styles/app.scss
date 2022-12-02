@@ -1,0 +1,37 @@
+@import "~bootstrap/scss/bootstrap";
+@import "~nouislider";
+@import "./slider";
+
+.filter-categories {
+  .scroll {
+    height: 200px;
+    overflow-y: scroll;
+
+    .category {
+      display: flex;
+      justify-content: space-between
+    }
+  }
+}
+
+.filter-weight {
+  .fields {
+    display: flex;
+
+    input {
+      width: 100px;
+
+      &:first-child {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+.product {
+  border-bottom: 1px solid $gray-300;
+
+  p {
+    margin: 0;
+  }
+}

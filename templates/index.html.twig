@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class='container'>
+        <div class='row pt-5'>
+            <div class='col-md-3'>
+                {{ form_start(filterForm) }}
+                    {{ form_row(filterForm.sort_by) }}
+                    {{ form_row(filterForm.name) }}
+                    {{ form_row(filterForm.categories) }}
+                    <div class='filter-weight'>
+                        <p class="col-form-label">Weight</p>
+                        <div class='mb-3' id='slider'></div>
+                        {{ form_row(filterForm.weight.min) }}
+                        {{ form_row(filterForm.weight.max) }}
+                    </div>
+                {{ form_end(filterForm) }}
+            </div>
+            <div class='col-md'>
+                {{ pagerfanta(pager) }}
+                {% for product in products %}
+                    <div class='product pb-3 mb-3'>
+                        <h4>{{ product.name }}</h4>
+                        <p>Category: {{ product.category_name }}, Weight: {{ product.weight|weight }}</p>
+                    </div>
+                {%endfor%}
+                {{ pagerfanta(pager) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

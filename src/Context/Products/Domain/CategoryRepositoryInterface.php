@@ -6,4 +6,5 @@ interface CategoryRepositoryInterface
 {
     public function getByName(string $name): ?Category;
     public function save(Category $category): void;
+    public function all(): array;
 }

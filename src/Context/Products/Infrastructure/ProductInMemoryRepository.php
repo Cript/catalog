@@ -40,4 +40,8 @@ class ProductInMemoryRepository extends InMemoryAbstractRepository implements Pr
     {
         $this->add($product);
     }
+
+    public function findByIds(array $ids): array {
+        return [];
+    }
 }

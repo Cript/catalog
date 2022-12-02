@@ -82,14 +82,6 @@ final class Product extends AggregateRoot
             $this->weight->asInteger(),
             $this->category->id()
         ));
-
-        $this->record(new ProductUpdatedEvent(
-            $this->id()->toRfc4122(),
-            $this->name->value(),
-            $this->description,
-            $this->weight->asInteger(),
-            $this->category->id()
-        ));
         $this->record(new ProductChangedFromXMLEvent($this->id()->toRfc4122()));
     }
 }

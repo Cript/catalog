@@ -39,4 +39,13 @@ class CategoryDoctrineRepository extends ServiceEntityRepository implements Cate
         $this->getEntityManager()->persist($category);
         $this->getEntityManager()->flush($category);
     }
+
+    public function all(): array
+    {
+        $qb = $this->getEntityManager()->getConnection();
+
+        return $qb->executeQuery(
+            'SELECT c.id, c.name FROM category c ORDER BY c.name ASC'
+        )->fetchAllAssociative();
+    }
 }

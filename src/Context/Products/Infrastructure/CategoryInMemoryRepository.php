@@ -31,4 +31,8 @@ class CategoryInMemoryRepository extends InMemoryAbstractRepository implements C
     {
         $this->add($category);
     }
+
+    public function all(): array {
+        return [];
+    }
 }

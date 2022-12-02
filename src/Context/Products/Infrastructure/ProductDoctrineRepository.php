@@ -46,45 +46,18 @@ class ProductDoctrineRepository extends ServiceEntityRepository implements Produ
         $this->getEntityManager()->flush($product);
     }
 
-//    public function load(int $page, int $limit, ?string $categoryId = null, ?int $weight = null): array
-//    {
-//        $connection = $this->getEntityManager()->getConnection();
-//
-//        $qb = $connection->createQueryBuilder();
-//
-//        $qb->addSelect('p.id, p.description, p.name, p.weight, c.id as category_id, c.name as category_name')
-//            ->from('product', 'p')
-//            ->setFirstResult($page * $limit)
-//            ->setMaxResults($limit);
-//
-//        $this->filterByCategory($qb, $categoryId);
-//        $this->filterByWeight($qb, $weightMin, $weightMax);
-//
-//        return $qb->fetchAllAssociative();
-//    }
-
-//    private function filterByCategory(QueryBuilder $qb, ?string $categoryId): void
-//    {
-//        if (null !== $categoryId) {
-//            $joinOn = $qb->expr()->and(
-//                $qb->expr()->eq('c.id', 'p.category_id'),
-//                $qb->expr()->eq('c.name', ':category_id')
-//            );
-//            $qb->setParameter('category_id', $categoryId);
-//
-//        } else {
-//            $joinOn = $qb->expr()->and(
-//                $qb->expr()->eq('c.id', 'p.category_id')
-//            );
-//        }
-//
-//        $qb->innerJoin('p', 'category', 'c', $joinOn);
-//    }
-
-    private function filterByWeight(QueryBuilder $qb, ?int $weightMin, ?int $weightMax)
+    public function findByIds(array $ids): array
     {
-//        if(null !== $weight) {
-//            $qb->where('p.weight')
-//        }
+        $qb = $this->getEntityManager()->getConnection()->createQueryBuilder();
+
+        $products = $qb
+            ->select('p.id, p.name, p.weight, c.name as category_name')
+            ->from('product', 'p')
+            ->leftJoin('p', 'category', 'c', 'c.id = p.category_id')
+            ->where($qb->expr()->in('p.id', '?'))
+            ->setParameter(0, $ids, \Doctrine\DBAL\Connection::PARAM_INT_ARRAY)
+            ->fetchAllAssociative();
+
+        return $products;
     }
 }

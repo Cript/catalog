@@ -2,21 +2,34 @@
 
 namespace App\Context\Products\Application\Query\GetProducts;
 
+use App\Context\Elasticsearch\Application\Query\GetProducts\GetProducts as ElasticsearchGetProducts;
+use App\Context\Elasticsearch\Application\Query\GetProducts\Response;
 use App\Context\Products\Domain\ProductRepositoryInterface;
+use App\Context\Shared\Application\Bus\Query\QueryBusInterface;
 use App\Context\Shared\Application\Bus\Query\QueryHandlerInterface;
 
 final class GetProductsHandler implements QueryHandlerInterface
 {
     public function __construct(
-        private readonly ProductRepositoryInterface $repository
+        private readonly QueryBusInterface $queryBus,
+        private readonly ProductRepositoryInterface $productRepository
     ) {}
 
-    public function __invoke(GetProducts $query): array
+    public function __invoke(GetProducts $query): Response
     {
-        dd($query);
+        $filteredData = $this->getFilteredData($query);
 
-        $products = $this->repository->load($query->page(), $query->limit(), $query->categoryId());
+        $products = $this->productRepository->findByIds($filteredData->products());
 
-        return $products;
+        $response = new Response($filteredData->total(), $products);
+
+        return $response;
+    }
+
+    private function getFilteredData(GetProducts $query): Response
+    {
+        $perPage = 10;
+        $query = new ElasticsearchGetProducts($query->filter(), $query->page(), $perPage);
+        return $this->queryBus->ask($query);
     }
 }

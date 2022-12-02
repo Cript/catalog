@@ -51,16 +51,4 @@ final class Weight extends DefaultValueObject
                 return $this->weight;
         }
     }
-
-//    public function equals(DomainObjectInterface $object): bool
-//    {
-//        if (!$this->sameTypeAs($object)) {
-//            return false;
-//        }
-//
-//        /**
-//         * @var Weight $weight
-//         */
-//        return $object->weight() === $this->weight && $object->unit() === $this->unit;
-//    }
 }
