@@ -14,6 +14,7 @@ class ProductCreatedEvent implements EventInterface
         private readonly string $description,
         private readonly string $weight,
         private readonly string $categoryId,
+        private readonly string $categoryName,
     ) {}
 
     public function productId(): string
@@ -39,5 +40,10 @@ class ProductCreatedEvent implements EventInterface
     public function categoryId(): string
     {
         return $this->categoryId;
+    }
+
+    public function categoryName(): string
+    {
+        return $this->categoryName;
     }
 }

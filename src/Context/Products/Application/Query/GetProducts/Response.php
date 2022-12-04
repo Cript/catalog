@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Context\Elasticsearch\Application\Query\GetProducts;
+namespace App\Context\Products\Application\Query\GetProducts;
 
 class Response
 {

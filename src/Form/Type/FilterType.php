@@ -2,10 +2,8 @@
 
 namespace App\Form\Type;
 
-use App\Context\Shared\Application\Bus\Query\QueryBusInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,8 +18,8 @@ class FilterType extends AbstractType
             ->add('sort_by', ChoiceType::class, [
                 'choices' => [
                     'Default' => 'default',
-                    'By weight asc' => 'by_weight_asc',
-                    'By weight desc' => 'by_weight_desc'
+                    'By weight asc' => 'weight_asc',
+                    'By weight desc' => 'weight_desc'
                 ]
             ])
             ->add('name', TextType::class, [

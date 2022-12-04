@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
-use App\Context\Elasticsearch\Application\Query\GetAggregates\GetAggregates;
-use App\Context\Elasticsearch\Domain\Filter;
+use App\Context\Products\Application\Query\GetAggregates\GetAggregates;
+use App\Context\Products\Application\Filter;
 use App\Context\Products\Application\Query\GetCategories\GetCategories;
 use App\Context\Products\Application\Query\GetProducts\GetProducts;
-use App\Context\Products\Application\Query\GetProducts\Response;
+use App\Context\Products\Application\Sorting;
 use App\Context\Shared\Application\Bus\Query\QueryBusInterface;
 use App\Form\Type\FilterType;
 use Pagerfanta\Adapter\FixedAdapter;
@@ -24,19 +24,18 @@ class CatalogController extends AbstractController
         Request $request,
         QueryBusInterface $queryBus
     ) {
-        $requestFilter = $request->query->all()['filter'];
+        $requestFilter = $request->query->all()['filter'] ?? [];
         $filter = new Filter([
             'name' => $requestFilter['name'] ?? null,
             'categories' => $requestFilter['categories']['categories'] ?? null,
             'weight' => $requestFilter['weight'] ?? null
         ]);
+        $page = $request->query->get('page', 1);
+        $sorting = new Sorting($requestFilter['sort_by'] ?? null);
 
         $categories = $this->loadCategories($queryBus);
         $aggregates = $this->loadAggregates($queryBus, $filter);
-
-        $page = $request->query->get('page', 1);
-        $query = new GetProducts($filter, $page - 1, $requestFilter['sort_by']);
-        $products = $queryBus->ask($query);
+        $products = $this->loadProducts($queryBus, $filter, $page, $sorting);
 
         $filterForm = $this->createForm(FilterType::class, null, [
             'categories' => $categories,
@@ -64,6 +63,12 @@ class CatalogController extends AbstractController
     private function loadAggregates(QueryBusInterface $queryBus, Filter $filter)
     {
         $query = new GetAggregates($filter);
+        return $queryBus->ask($query);
+    }
+
+    private function loadProducts(QueryBusInterface $queryBus, Filter $filter, int $page, Sorting $sorting)
+    {
+        $query = new GetProducts($filter, $page - 1, $sorting);
         return $queryBus->ask($query);
     }
 }

@@ -6,7 +6,7 @@ namespace App\Context\Products\Domain\Event;
 
 use App\Context\Shared\Application\Bus\Event\EventInterface;
 
-class ProductChangedFromXMLEvent implements EventInterface
+class ProductCreatedFromXMLEvent implements EventInterface
 {
     public function __construct(
         private readonly string $productImportId

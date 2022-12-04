@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Context\Elasticsearch\Application\EventHandler;
+namespace App\Context\Products\Application\EventHandler;
 
-use App\Context\Elasticsearch\Domain\RepositoryInterface;
 use App\Context\Products\Domain\Event\ProductCreatedEvent;
+use App\Context\Products\Domain\ProductIndexRepositoryInterface;
 use App\Context\Shared\Application\Bus\Event\EventHandlerInterface;
 
 final class ProductCreatedHandler implements EventHandlerInterface
 {
     public function __construct(
-        private RepositoryInterface $repository
+        private readonly ProductIndexRepositoryInterface $repository
     ) {}
 
     public function __invoke(ProductCreatedEvent $event)
@@ -19,7 +19,8 @@ final class ProductCreatedHandler implements EventHandlerInterface
             $event->name(),
             $event->description(),
             $event->weight(),
-            $event->categoryId()
+            $event->categoryId(),
+            $event->categoryName()
         );
     }
 }

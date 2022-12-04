@@ -5,19 +5,15 @@ namespace App\Context\Products\Infrastructure;
 use App\Context\Products\Domain\Product;
 use App\Context\Products\Domain\ProductRepositoryInterface;
 use App\Context\Shared\Infrastructure\InMemoryAbstractRepository;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\DBAL\Query\QueryBuilder;
-use Doctrine\ORM\NoResultException;
-use Doctrine\Persistence\ManagerRegistry;
 
 class ProductInMemoryRepository extends InMemoryAbstractRepository implements ProductRepositoryInterface
 {
-    public function load(int $page, int $limit, string $category): array
+    public function load(?array $filter, int $page, int $perPage, string $sortBy, string $sortOrder): array
     {
         return [];
     }
 
-    public function getByName(string $name): ?Product
+    public function loadByName(string $name): ?Product
     {
         $products = array_filter($this->items, function (Product $product) use ($name) {
             $productName = (new \ReflectionObject($product))->getProperty('name')->getValue($product);
@@ -36,12 +32,13 @@ class ProductInMemoryRepository extends InMemoryAbstractRepository implements Pr
         return array_shift($products);
     }
 
-    public function save(Product $product): void
+    public function create(Product $product): void
     {
         $this->add($product);
     }
 
-    public function findByIds(array $ids): array {
-        return [];
+    public function update(Product $product): void
+    {
+        $this->add($product);
     }
 }

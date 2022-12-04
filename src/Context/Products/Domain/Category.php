@@ -21,6 +21,11 @@ class Category extends AggregateRoot
     ): Category {
         return new static(Uuid::v4(), $name);
     }
+
+    public function name(): Name
+    {
+        return $this->name;
+    }
 }
 
 

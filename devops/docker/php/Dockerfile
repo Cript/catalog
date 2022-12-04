@@ -14,6 +14,12 @@ RUN apk add --no-cache --virtual .php_builddeps autoconf g++ make \
 
 COPY devops/docker/php/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
+# Php configs
+RUN rm -rf /usr/local/etc/php/php-fpm.d/*.conf
+COPY devops/docker/php/conf.d/      /usr/local/etc/php/conf.d
+COPY devops/docker/php/php-fpm.conf /usr/local/etc/php-fpm.conf
+COPY devops/docker/php/php-fpm.d/   /usr/local/etc/php-fpm.d/
+
 RUN addgroup -g ${USER_GID} app \
   && adduser -D -s /bin/sh -G app -u ${USER_UID} app
 

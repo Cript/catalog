@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Context\Elasticsearch\Application\Query\GetAggregates;
+namespace App\Context\Products\Application\Query\GetAggregates;
 
-use App\Context\Elasticsearch\Domain\Filter;
+use App\Context\Products\Application\Filter;
 use App\Context\Shared\Application\Bus\Query\QueryInterface;
 
 class GetAggregates implements QueryInterface

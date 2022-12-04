@@ -23,17 +23,17 @@ final class CreateOrUpdateProductFromXMLHandler implements CommandHandlerInterfa
         $weight = Weight::fromString($command->weight());
         $category = $this->checkCategory($command->categoryName());
 
-        $product = $this->repository->getByName($command->name());
+        $product = $this->repository->loadByName($command->name());
 
         if (null === $product) {
             $product = Product::createFromXML($name, $command->description(), $weight, $category);
+            $this->repository->create($product);
         } else {
             $product->updateFromXML(
                 $name, $command->description(), $weight, $category
             );
+            $this->repository->update($product);
         }
-
-        $this->repository->save($product);
     }
 
     private function checkCategory(string $name): Category {

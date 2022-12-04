@@ -4,8 +4,7 @@ namespace App\Context\Products\Domain;
 
 interface ProductRepositoryInterface
 {
-    public function load(int $page, int $limit, string $category): array;
-    public function getByName(string $name): ?Product;
-    public function save(Product $product): void;
-    public function findByIds(array $ids): array;
+    public function loadByName(string $name): ?Product;
+    public function create(Product $product): void;
+    public function update(Product $product): void;
 }

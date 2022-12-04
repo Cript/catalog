@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Context\Elasticsearch\Application\Query\GetAggregates;
+namespace App\Context\Products\Application\Query\GetAggregates;
 
-use App\Context\Elasticsearch\Domain\RepositoryInterface;
+use App\Context\Products\Domain\ProductIndexRepositoryInterface;
 use App\Context\Shared\Application\Bus\Query\QueryHandlerInterface;
 
 final class GetAggregatesHandler implements QueryHandlerInterface
 {
     public function __construct(
-        private readonly RepositoryInterface $repository
+        private readonly ProductIndexRepositoryInterface $repository
     ) {}
 
     public function __invoke(GetAggregates $query): Response

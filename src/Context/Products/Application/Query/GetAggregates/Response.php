@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Context\Elasticsearch\Application\Query\GetAggregates;
+namespace App\Context\Products\Application\Query\GetAggregates;
 
 class Response
 {

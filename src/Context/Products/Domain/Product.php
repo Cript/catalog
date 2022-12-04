@@ -4,6 +4,7 @@ namespace App\Context\Products\Domain;
 
 use App\Context\Products\Domain\Event\ProductCreatedEvent;
 use App\Context\Products\Domain\Event\ProductChangedFromXMLEvent;
+use App\Context\Products\Domain\Event\ProductCreatedFromXMLEvent;
 use App\Context\Products\Domain\Event\ProductUpdatedEvent;
 use App\Context\Products\Domain\ValueObject\Name;
 use App\Context\Products\Domain\ValueObject\Weight;
@@ -26,7 +27,8 @@ final class Product extends AggregateRoot
             $this->name->value(),
             $this->description,
             $this->weight->asInteger(),
-            $this->category->id()
+            $this->category->id(),
+            $this->category->name()->value()
         ));
     }
 
@@ -57,7 +59,7 @@ final class Product extends AggregateRoot
     {
         $product = Product::create($name, $description, $weight, $category);
 
-        $product->record(new ProductChangedFromXMLEvent(
+        $product->record(new ProductCreatedFromXMLEvent(
             $product->id()->toRfc4122()
         ));
 
@@ -80,8 +82,29 @@ final class Product extends AggregateRoot
             $this->name->value(),
             $this->description,
             $this->weight->asInteger(),
-            $this->category->id()
+            $this->category->id(),
+            $this->category->name()->value()
         ));
         $this->record(new ProductChangedFromXMLEvent($this->id()->toRfc4122()));
+    }
+
+    public function name(): Name
+    {
+        return $this->name;
+    }
+
+    public function description(): string
+    {
+        return $this->description;
+    }
+
+    public function weight(): Weight
+    {
+        return $this->weight;
+    }
+
+    public function category(): Category
+    {
+        return $this->category;
     }
 }

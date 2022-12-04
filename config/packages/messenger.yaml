@@ -19,6 +19,7 @@ framework:
         routing:
             'App\Context\Products\Application\Query\GetProducts\GetProducts': sync
             'App\Context\ImportXML\Domain\Event\ProductAddedFromXMLEvent': xml_import
+            'App\Context\Products\Domain\Event\ProductCreatedFromXMLEvent': xml_import
             'App\Context\Products\Domain\Event\ProductChangedFromXMLEvent': xml_import
             'App\Context\Products\Domain\Event\ProductCreatedEvent': products
             'App\Context\Products\Domain\Event\ProductUpdatedEvent': products

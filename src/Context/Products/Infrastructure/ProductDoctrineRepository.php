@@ -16,12 +16,7 @@ class ProductDoctrineRepository extends ServiceEntityRepository implements Produ
         parent::__construct($registry, Product::class);
     }
 
-    public function load(int $page, int $limit, string $category): array
-    {
-        return [];
-    }
-
-    public function getByName(string $name): ?Product
+    public function loadByName(string $name): ?Product
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
 
@@ -40,24 +35,15 @@ class ProductDoctrineRepository extends ServiceEntityRepository implements Produ
         return $product;
     }
 
-    public function save(Product $product): void
+    public function create(Product $product): void
     {
         $this->getEntityManager()->persist($product);
         $this->getEntityManager()->flush($product);
     }
 
-    public function findByIds(array $ids): array
+    public function update(Product $product): void
     {
-        $qb = $this->getEntityManager()->getConnection()->createQueryBuilder();
-
-        $products = $qb
-            ->select('p.id, p.name, p.weight, c.name as category_name')
-            ->from('product', 'p')
-            ->leftJoin('p', 'category', 'c', 'c.id = p.category_id')
-            ->where($qb->expr()->in('p.id', '?'))
-            ->setParameter(0, $ids, \Doctrine\DBAL\Connection::PARAM_INT_ARRAY)
-            ->fetchAllAssociative();
-
-        return $products;
+        $this->getEntityManager()->persist($product);
+        $this->getEntityManager()->flush($product);
     }
 }

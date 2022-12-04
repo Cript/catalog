@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Context\Elasticsearch\Domain;
+namespace App\Context\Products\Application;
 
 class Filter
 {

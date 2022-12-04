@@ -2,15 +2,18 @@
 
 namespace App\Context\Products\Application\Query\GetProducts;
 
-use App\Context\Elasticsearch\Domain\Filter;
+use App\Context\Products\Application\Filter;
+use App\Context\Products\Application\Sorting;
 use App\Context\Shared\Application\Bus\Query\QueryInterface;
 
 class GetProducts implements QueryInterface
 {
+    private int $perPage = 10;
+
     public function __construct(
         private readonly Filter $filter,
         private readonly int $page,
-        private readonly string $sort
+        private readonly Sorting $sorting
     ) {}
 
     public function filter(): Filter
@@ -21,5 +24,15 @@ class GetProducts implements QueryInterface
     public function page(): int
     {
         return $this->page;
+    }
+
+    public function perPage(): int
+    {
+        return $this->perPage;
+    }
+
+    public function sorting(): Sorting
+    {
+        return $this->sorting;
     }
 }

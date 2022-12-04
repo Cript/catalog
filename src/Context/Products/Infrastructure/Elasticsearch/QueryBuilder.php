@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Context\Elasticsearch\Infrastructure;
+namespace App\Context\Products\Infrastructure\Elasticsearch;
 
 class QueryBuilder
 {
@@ -76,6 +76,15 @@ class QueryBuilder
                     "size" => 1000,
                     "field" => "category"
                 ]
+            ]
+        ];
+    }
+
+    public function buildSort(string $sortBy, string $sortOrder): array
+    {
+        return [
+            $sortBy => [
+                "order" => $sortOrder
             ]
         ];
     }
