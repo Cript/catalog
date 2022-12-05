@@ -12,7 +12,7 @@ class ProductCreatedEvent implements EventInterface
         private readonly string $productId,
         private readonly string $name,
         private readonly string $description,
-        private readonly string $weight,
+        private readonly int $weight,
         private readonly string $categoryId,
         private readonly string $categoryName,
     ) {}
@@ -32,7 +32,7 @@ class ProductCreatedEvent implements EventInterface
         return $this->description;
     }
 
-    public function weight(): string
+    public function weight(): int
     {
         return $this->weight;
     }

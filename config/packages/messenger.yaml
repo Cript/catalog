@@ -17,6 +17,7 @@ framework:
 #            failed: 'doctrine://default?queue_name=failed'
 
         routing:
+            'App\Context\ImportXML\Application\Command\ImportXML\ImportXML': xml_import
             'App\Context\Products\Application\Query\GetProducts\GetProducts': sync
             'App\Context\ImportXML\Domain\Event\ProductAddedFromXMLEvent': xml_import
             'App\Context\Products\Domain\Event\ProductCreatedFromXMLEvent': xml_import

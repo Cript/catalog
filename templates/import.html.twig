@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class='container'>
+        <div class='row'>
+            <div class='col-md-12'>
+                <h1>Import XML</h1>
+                <div class='flow-drop'>
+                    <a class='flow-browse'>Select import file</a>
+                </div>
+
+                <div class='flow-progress'>
+                    <table class='table'>
+                        <tr>
+                            <td class='progress-td'>
+                                <div class='progress-container'>
+                                    <div class='progress-bar'></div>
+                                </div>
+                            </td>
+                            <td class='progress-pause' nowrap='nowrap'>
+                                <a href='#' onclick='r.upload(); return false;' class='progress-resume-link'>
+                                    <img src='{{ asset('build/images/resume.png') }}' alt='Resume upload'>
+                                </a>
+                                <a href='#' onclick='r.pause(); return false;' class='progress-pause-link'>
+                                    <img src='{{ asset('build/images/pause.png') }}' alt='Pause upload'>
+                                </a>
+                                <a href='#' onclick='r.cancel(); return false;' class='progress-cancel-link'>
+                                    <img src='{{ asset('build/images/cancel.png') }}' alt='Cancel upload'>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <ul class='flow-list'></ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

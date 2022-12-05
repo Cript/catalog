@@ -87,24 +87,4 @@ final class Product extends AggregateRoot
         ));
         $this->record(new ProductChangedFromXMLEvent($this->id()->toRfc4122()));
     }
-
-    public function name(): Name
-    {
-        return $this->name;
-    }
-
-    public function description(): string
-    {
-        return $this->description;
-    }
-
-    public function weight(): Weight
-    {
-        return $this->weight;
-    }
-
-    public function category(): Category
-    {
-        return $this->category;
-    }
 }

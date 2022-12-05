@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Tests\Context\ImportXML\Domain\Event;
+namespace App\Tests\Context\Products\Domain\Event;
 
 use App\Context\Products\Domain\Event\ProductChangedFromXMLEvent;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Uid\Uuid;
 
-class ProductCreatedOrUpdatedFromXMLTest extends TestCase
+class ProductChangedFromXMLEventTest extends TestCase
 {
     public function testConstructSuccess(): void
     {
@@ -15,6 +15,6 @@ class ProductCreatedOrUpdatedFromXMLTest extends TestCase
         $event = new ProductChangedFromXMLEvent($id);
 
         $this->assertInstanceOf(ProductChangedFromXMLEvent::class, $event);
-        $this->assertEquals($id, $event->productId());
+        $this->assertEquals($id, $event->productImportId());
     }
 }

@@ -7,7 +7,7 @@ use Twig\TwigFilter;
 
 class WeightExtension extends AbstractExtension
 {
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('weight', [$this, 'formatWeight']),
