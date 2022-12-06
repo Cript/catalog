@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
+use App\Context\Products\Application\Query\Filter;
 use App\Context\Products\Application\Query\GetAggregates\GetAggregates;
-use App\Context\Products\Application\Filter;
 use App\Context\Products\Application\Query\GetCategories\GetCategories;
 use App\Context\Products\Application\Query\GetProducts\GetProducts;
-use App\Context\Products\Application\Sorting;
+use App\Context\Products\Application\Query\Sorting;
 use App\Context\Shared\Application\Bus\Query\QueryBusInterface;
 use App\Form\Type\FilterType;
 use Pagerfanta\Adapter\FixedAdapter;

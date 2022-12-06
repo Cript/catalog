@@ -3,15 +3,22 @@ services:
     test.product.create_or_update_product_from_xml:
         alias: App\Context\Products\Application\Command\CreateOrUpdateProductFromXML\CreateOrUpdateProductFromXMLHandler
         public: true
+    test.product.get_categories:
+        alias: App\Context\Products\Application\Query\GetCategories\GetCategoriesHandler
+        public: true
     test.product.product_repository:
         alias: App\Context\Products\Infrastructure\ProductInMemoryRepository
         public: true
     test.product.category_repository:
         alias: App\Context\Products\Infrastructure\CategoryInMemoryRepository
         public: true
+    test.product.product_index_repository:
+        alias: App\Context\Products\Infrastructure\ProductIndexInMemoryRepository
+        public: true
 
     App\Context\Products\Domain\ProductRepositoryInterface: '@App\Context\Products\Infrastructure\ProductInMemoryRepository'
     App\Context\Products\Domain\CategoryRepositoryInterface: '@App\Context\Products\Infrastructure\CategoryInMemoryRepository'
+    App\Context\Products\Domain\ProductIndexRepositoryInterface: '@App\Context\Products\Infrastructure\ProductIndexInMemoryRepository'
 
 ### ImportXML Context
     test.import_xml.handler:

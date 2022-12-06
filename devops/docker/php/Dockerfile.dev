@@ -3,7 +3,7 @@ FROM php:8.1-fpm-alpine
 ARG USER_GID=1000
 ARG USER_UID=1000
 
-RUN apk update && apk add libpq-dev \
+RUN apk update && apk add libpq-dev supervisor \
     && docker-php-ext-install pdo pdo_pgsql
 
 # Xdebug
@@ -20,6 +20,10 @@ COPY devops/docker/php/conf.d/      /usr/local/etc/php/conf.d
 COPY devops/docker/php/php-fpm.conf /usr/local/etc/php-fpm.conf
 COPY devops/docker/php/php-fpm.d/   /usr/local/etc/php-fpm.d/
 
+# Supervisor
+COPY devops/docker/php/supervisor/supervisord.conf /etc/supervisord.conf
+COPY devops/docker/php/supervisor/conf.d/ /etc/supervisor/conf.d
+
 RUN addgroup -g ${USER_GID} app \
   && adduser -D -s /bin/sh -G app -u ${USER_UID} app
 
@@ -34,4 +38,4 @@ WORKDIR /var/www/html
 
 COPY --chown=app:app composer.json composer.lock ./
 
-CMD ["php", "-S", "0.0.0.0:8000", "-t", "public/"]
+CMD ["/usr/bin/supervisord"]

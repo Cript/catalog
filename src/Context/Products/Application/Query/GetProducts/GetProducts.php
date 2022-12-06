@@ -2,8 +2,8 @@
 
 namespace App\Context\Products\Application\Query\GetProducts;
 
-use App\Context\Products\Application\Filter;
-use App\Context\Products\Application\Sorting;
+use App\Context\Products\Application\Query\Filter;
+use App\Context\Products\Application\Query\Sorting;
 use App\Context\Shared\Application\Bus\Query\QueryInterface;
 
 class GetProducts implements QueryInterface

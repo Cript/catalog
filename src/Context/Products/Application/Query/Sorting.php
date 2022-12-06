@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Context\Products\Application;
+namespace App\Context\Products\Application\Query;
 
 class Sorting
 {

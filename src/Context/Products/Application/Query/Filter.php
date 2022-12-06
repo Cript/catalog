@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Context\Products\Application;
+namespace App\Context\Products\Application\Query;
 
 class Filter
 {
@@ -21,11 +21,6 @@ class Filter
         $this->filters = array_merge($this->validFilters, $filters);
     }
 
-    public function exists(string $name): bool
-    {
-        return null !== $this->filters[$name] && !empty($this->filters[$name]);
-    }
-
     public function without(string $name): array
     {
         return $this->filterEmpty(
@@ -41,7 +36,7 @@ class Filter
     private function filterEmpty(array $filters): array
     {
         return array_filter($filters, function($value) use ($filters) {
-            return !empty($value);
+            return is_array($value) ? $this->filterEmpty($value) : !empty($value);
         });
     }
 }

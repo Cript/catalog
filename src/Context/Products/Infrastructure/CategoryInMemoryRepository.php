@@ -32,7 +32,19 @@ class CategoryInMemoryRepository extends InMemoryAbstractRepository implements C
         $this->add($category);
     }
 
-    public function all(): array {
-        return [];
+    public function all(): array
+    {
+        $categories = [];
+        /**
+         * @var Category $category
+         */
+        foreach ($this->items as $category) {
+            $categories[] = [
+                'id' => $category->id()->toRfc4122(),
+                'name' => $category->name()->value()
+            ];
+        }
+
+        return $categories;
     }
 }

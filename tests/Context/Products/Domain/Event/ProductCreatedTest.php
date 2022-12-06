@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Context\ImportXML\Domain\Event;
+namespace App\Tests\Context\Products\Domain\Event;
 
 use App\Context\Products\Domain\Event\ProductCreatedEvent;
 use PHPUnit\Framework\TestCase;
@@ -13,10 +13,11 @@ class ProductCreatedTest extends TestCase
         $id = Uuid::v4()->toRfc4122();
         $name = 'name';
         $description = 'description';
-        $weight = '10 g';
+        $weight = 1000;
         $category = 'category';
+        $categoryName = 'category_name';
 
-        $event = new ProductCreatedEvent($id, $name, $description, $weight, $category);
+        $event = new ProductCreatedEvent($id, $name, $description, $weight, $category, $categoryName);
 
         $this->assertInstanceOf(ProductCreatedEvent::class, $event);
         $this->assertEquals($id, $event->productId());
