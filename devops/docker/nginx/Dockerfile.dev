@@ -1,0 +1,15 @@
+FROM nginx:1.23-alpine
+
+COPY devops/docker/nginx/app.nginx /etc/nginx/conf.d/default.conf
+COPY devops/docker/nginx/nginx.nginx /etc/nginx/nginx.conf
+
+ARG USER_GID=1000
+ARG USER_UID=1000
+
+RUN addgroup -g ${USER_GID} app \
+    && adduser -D -s /bin/sh -G app -u ${USER_UID} app
+
+RUN mkdir -p /var/www/html \
+    && chown -R app:app /var/www
+
+CMD ["nginx", "-g", "daemon off;"]

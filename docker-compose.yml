@@ -1,15 +1,10 @@
 services:
     catalog:
-        build:
-            context: .
-            dockerfile: devops/docker/php/Dockerfile
-            args:
-                USER_ID: ${USER_ID:-0}
-                GROUP_ID: ${GROUP_ID:-0}
-        ports:
-            - "8000:8000"
-        volumes:
-            - .:/var/www/html
+        image: aboro/kt_catalog:latest
+        networks:
+            - app
+    nginx:
+        image: aboro/kt_nginx:latest
         networks:
             - app
     postgres:

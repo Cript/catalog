@@ -1,4 +1,25 @@
 services:
+    catalog:
+        build:
+            context: .
+            dockerfile: devops/docker/php/Dockerfile.dev
+            args:
+                USER_ID: ${USER_ID:-0}
+                GROUP_ID: ${GROUP_ID:-0}
+        volumes:
+            - .:/var/www/html
+        networks:
+            - app
+    nginx:
+        build:
+            context: ./devops/docker/nginx/
+            dockerfile: devops/docker/nginx/Dockerfile.dev
+        volumes:
+            - .:/var/www/html
+        ports:
+            - "1000:80"
+        depends_on:
+            - catalog
     postgres:
         ports:
             - "5432:5432"

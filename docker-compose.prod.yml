@@ -1,0 +1,7 @@
+services:
+    catalog:
+        environment:
+            - APP_ENV=prod
+    nginx:
+        ports:
+            - "80:80"
