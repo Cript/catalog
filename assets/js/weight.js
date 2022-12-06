@@ -15,8 +15,8 @@ if (weightSlider) {
         start: [filterMinValue, filterMaxValue],
         connect: true,
         range: {
-            'min': minValue,
-            'max': maxValue
+            min: minValue,
+            max: maxValue
         },
         tooltips: {
             to: function (numericValue) {

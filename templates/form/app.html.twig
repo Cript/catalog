@@ -8,3 +8,8 @@
         </div>
     </div>
 {%- endblock choice_widget_expanded -%}
+
+{%- block _filter_submit_widget -%}
+        {{- form_widget(form) -}}
+    <a class='btn btn-danger' href='{{ path(app.request.attributes.get('_route')) }}'>Clear</a>
+{%- endblock _filter_submit_widget -%}

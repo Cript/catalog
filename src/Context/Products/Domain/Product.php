@@ -11,7 +11,7 @@ use App\Context\Products\Domain\ValueObject\Weight;
 use App\Context\Shared\Domain\AggregateRoot;
 use Symfony\Component\Uid\Uuid;
 
-final class Product extends AggregateRoot
+class Product extends AggregateRoot
 {
     private function __construct(
         Uuid $id,

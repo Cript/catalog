@@ -6,7 +6,7 @@ use App\Context\ImportXML\Domain\Event\ProductAddedFromXMLEvent;
 use App\Context\Shared\Domain\AggregateRoot;
 use Symfony\Component\Uid\Uuid;
 
-final class Product extends AggregateRoot
+class Product extends AggregateRoot
 {
     private const STATUS_ADDED = 1;
     private const STATUS_COMPLETED = 5;

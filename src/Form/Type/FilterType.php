@@ -3,6 +3,7 @@
 namespace App\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -26,13 +27,18 @@ class FilterType extends AbstractType
                 'required' => false
             ])
             ->add('categories', CategoriesType::class, [
+                'label' => false,
                 'categories' => $options['categories'],
                 'aggregates' => $options['aggregates']
             ])
             ->add('weight', WeightType::class, [
                 'aggregates' => $options['aggregates']
             ])
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, [
+                'row_attr' => [
+                    'class' => 'filter-submit',
+                ],
+            ])
         ;
     }
 

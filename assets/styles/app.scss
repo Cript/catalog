@@ -28,6 +28,11 @@
   }
 }
 
+.filter-submit {
+  display: flex;
+  justify-content: space-between;
+}
+
 .product {
   border-bottom: 1px solid $gray-300;
 
