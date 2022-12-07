@@ -6,6 +6,10 @@ ARG USER_UID=1000
 RUN apk update && apk add libpq-dev supervisor \
     && docker-php-ext-install pdo pdo_pgsql
 
+# Yandex clound
+RUN wget "https://storage.yandexcloud.net/cloud-certs/CA.pem" --output-document ${YANDEX_CLOUD_CERT} && \
+  chmod 0600 ${YANDEX_CLOUD_CERT}
+
 # Php configs
 RUN rm -rf /usr/local/etc/php/php-fpm.d/*.conf
 COPY devops/docker/php/conf.d/      /usr/local/etc/php/conf.d

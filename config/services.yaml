@@ -5,6 +5,9 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     elasticsearch_url: '%env(ELASTICSEARCH_URL)%'
+    elasticsearch_user: '%env(ELASTICSEARCH_LOGIN)%'
+    elasticsearch_password: '%env(ELASTICSEARCH_PASSWORD)%'
+    yandex_cloud_cert: '%env(YANDEX_CLOUD_CERT)%'
 
 services:
     # default configuration for services in *this* file
@@ -13,6 +16,10 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
             $projectDir: '%kernel.project_dir%'
+            $elasticsearchUrl: '%elasticsearch_url%'
+            $elasticsearchUser: '%elasticsearch_user%'
+            $elasticsearchPassword: '%elasticsearch_password%'
+            $yandexCloudCert: '%yandex_cloud_cert%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

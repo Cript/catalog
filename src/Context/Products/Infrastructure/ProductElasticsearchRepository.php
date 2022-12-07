@@ -14,7 +14,11 @@ final class ProductElasticsearchRepository implements ProductIndexRepositoryInte
     private Client $client;
 
     public function __construct(
-        private readonly QueryBuilder $queryBuilder
+        private readonly QueryBuilder $queryBuilder,
+        private string $elasticsearchUrl,
+        private string $elasticsearchUser,
+        private string $elasticsearchPassword,
+        private string $yandexCloudCert
     ) {
         $this->client = $this->buildClient();
     }
@@ -131,7 +135,10 @@ final class ProductElasticsearchRepository implements ProductIndexRepositoryInte
     private function buildClient(): Client
     {
         return ClientBuilder::create()
-            ->setHosts(['elasticsearch:9200'])
+            ->setHosts([$this->elasticsearchUrl])
+            ->setCABundle($this->yandexCloudCert)
+            ->setSSLVerification()
+            ->setBasicAuthentication($this->elasticsearchUser, $this->elasticsearchPassword)
             ->build();
     }
 

@@ -12,7 +12,7 @@ services:
             - app
     nginx:
         build:
-            context: ./devops/docker/nginx/
+            context: .
             dockerfile: devops/docker/nginx/Dockerfile.dev
         volumes:
             - .:/var/www/html

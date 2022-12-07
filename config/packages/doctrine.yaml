@@ -1,6 +1,8 @@
 doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
+        sslmode: 'verify-full'
+        sslrootcert: '%env(resolve:YANDEX_CLOUD_CERT)%'
         types:
             weight: App\Context\Products\Infrastructure\Doctrine\Type\WeightType
     orm:
